@@ -25,7 +25,7 @@ app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
 
-@app.route('/webhook/test/', methods=['POST'])
+@app.route('/webhook/test/', methods=['GET'])
 def IssueCreate():
 
     result = os.popen("echo '123'").readlines()
@@ -33,9 +33,11 @@ def IssueCreate():
     f=open('test.log','a+')
     f.write(str(result))
 
+    request.get_data()
 
-    #
     # post_data = json.loads(request.get_data())
+
+    print 123
     # alerts_list = post_data['alerts']
     #
     # for i in range(len(alerts_list)):
@@ -60,6 +62,6 @@ def IssueCreate():
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='127.0.0.1', port=8050)
+    app.run(debug=False, host='0.0.0.0', port=8060)
 
 
